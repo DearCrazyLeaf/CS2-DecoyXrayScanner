@@ -1,0 +1,7 @@
+{
+  "DecoyXR.ConfigReloaded": "[DecoyXR] Config reloaded",
+  "DecoyXR.Cleared": "[DecoyXR] All glows cleared",
+  "DecoyXR.Enabled": "[DecoyXR] ENABLED",
+  "DecoyXR.Disabled": "[DecoyXR] DISABLED",
+  "DecoyXR.Info": "[DecoyXR] Enabled={Orange}{0} Pulses={Lime}{1} Interval={Lime}{2}s Radius={Lime}{3} Glow={Lime}{4}s Allies={Orange}{5} Active={Lime}{6}"
+}
