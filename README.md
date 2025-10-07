@@ -103,7 +103,12 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 </a>
 
 ---
+
 # 中文版说明
+### >[中文论坛](https://bbs.csgocn.net/thread-1097.htm)<
+
+# CS2-DecoyXrayScanner
+
 [![Back to English](https://img.shields.io/badge/Back_to-English-blue)](#cs2-decoyxrayscanner)
 [![Release](https://img.shields.io/github/v/release/DearCrazyLeaf/CS2-DecoyXrayScanner?include_prereleases&color=blueviolet&label=最新版本)](https://github.com/DearCrazyLeaf/CS2-DecoyXrayScanner/releases/latest)
 [![License](https://img.shields.io/badge/许可证-GPL%203.0-orange)](https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -113,7 +118,7 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 [![GitHub Stars](https://img.shields.io/github/stars/DearCrazyLeaf/CS2-DecoyXrayScanner?color=yellow&label=标星)](https://github.com/DearCrazyLeaf/CS2-DecoyXrayScanner/stargazers)
 
 **CS2 诱饵弹探测雷“扫描脉冲”插件** 
-玩家丢出诱饵弹后按设定的延迟与间隔执行类似探测手雷的扫描效果，将范围内敌人（可选队友）短暂描边，并播放提示音，可通过指令热开关扫描功能
+- 玩家丢出诱饵弹后按设定的延迟与间隔执行类似探测手雷的扫描效果，将范围内敌人（可选队友）短暂描边，并播放提示音，可通过指令热开关扫描功能
 
 ![lovegif_1759796570369](https://github.com/user-attachments/assets/e85055b3-28c0-4d35-86bf-e22633a88d79)
 
@@ -142,7 +147,9 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 4. 修改配置并通过命令或重启生效
 
 ## 配置示例
-见上方英文部分 JSON。参数含义：
+见上方英文部分 JSON
+
+参数含义：
 | 键 | 含义 |
 |----|------|
 | Enabled | 总开关|
