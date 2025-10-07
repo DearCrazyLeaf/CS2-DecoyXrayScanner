@@ -1,7 +1,8 @@
 {
-  "DecoyXR.ConfigReloaded": "[{Lime}DecoyXR{Default}] ÅäÖÃÒÑÖØÔØ",
-  "DecoyXR.Cleared": "[{Lime}DecoyXR{Default}] ÒÑÇå³ıËùÓĞ±ê¼Ç",
-  "DecoyXR.Enabled": "[{Lime}DecoyXR{Default}] ÒÑÆôÓÃ",
-  "DecoyXR.Disabled": "[{Lime}DecoyXR{Default}] ÒÑ½ûÓÃ",
-  "DecoyXR.Info": "[{Lime}DecoyXR{Default}] ÊÇ·ñÆôÓÃ={Orange}{0} É¨Ãè´ÎÊı={Lime}{1} ¼ä¸ô={Lime}{2}s °ë¾¶={Lime}{3} ÏÔÊ¾={Lime}{4}s ÊÇ·ñ±ê¼Ç¶ÓÓÑ={Orange}{5} »î¶¯±ê¼Ç={Lime}{6}"
+  "DecoyXR.ConfigReloaded": "[{Lime}DecoyXR{Default}] é…ç½®å·²é‡è½½",
+  "DecoyXR.Cleared": "[{Lime}DecoyXR{Default}] å·²æ¸…é™¤æ‰€æœ‰æ ‡è®°",
+  "DecoyXR.Enabled": "[{Lime}DecoyXR{Default}] {Green}å·²å¯ç”¨",
+  "DecoyXR.Disabled": "[{Lime}DecoyXR{Default}] {Red}å·²ç¦ç”¨",
+  "DecoyXR.Info": "[{Lime}DecoyXR{Default}] æ˜¯å¦å¯ç”¨={Orange}{0} æ‰«ææ¬¡æ•°={Lime}{1} é—´éš”={Lime}{2}s åŠå¾„={Lime}{3} æ˜¾ç¤º={Lime}{4}s æ˜¯å¦æ ‡è®°é˜Ÿå‹={Orange}{5} æ´»åŠ¨æ ‡è®°={Lime}{6}",
+  "DecoyXR.NoPermission": "[{Lime}DecoyXR{Default}] {Red}æ²¡æœ‰æ‰§è¡Œè¯¥å‘½ä»¤çš„æƒé™{Default}ï¼"
 }

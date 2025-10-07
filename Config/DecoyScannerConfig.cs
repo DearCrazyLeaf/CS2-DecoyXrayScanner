@@ -1,10 +1,19 @@
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace CS2_DecoyXrayScanner.Config;
 
 public sealed class DecoyScannerConfig
 {
-    // Glow enable switch
+    // Master enable switch
     public bool Enabled { get; set; } = true;
+
+    // Command permissions (OR logic). Empty list => unrestricted
+    public List<string> AdminPermissions { get; set; } = [];
+
+    // Trigger permissions (who can activate scanning). OR logic. Empty list => everyone can trigger
+    public List<string> UseGlowPermissions { get; set; } = [];
+
     // How many pulses per decoy (default 2)
     public int PulseCount { get; set; } = 2;
     // Radius to scan each pulse
@@ -22,5 +31,5 @@ public sealed class DecoyScannerConfig
     // Ally glow color (used only if IncludeTeamMates = true)
     public string AllyGlowColor { get; set; } = "#FF0000";
     // Sound (engine relative path) played once per pulse; leave empty to disable.
-    public string PulseSound { get; set; } = "ui/competitive_accept_beep.vsnd";
+    public string PulseSound { get; set; } = "ui/beep07.wav";
 }

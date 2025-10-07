@@ -22,6 +22,7 @@
 - Per‑pulse sound (leave empty to disable)
 - Custom enemy & ally colors
 - Localization (English + Simplified Chinese)
+- Dual permission layers: one for commands, one for who can trigger scans by throwing decoys
 
 ## How It Works
 1. Listens for `weapon_decoy` fire event.
@@ -42,28 +43,48 @@
 ```json
 {
   "Enabled": true,
+  "AdminPermissions": [],
+  "UseGlowPermissions": [],
   "PulseCount": 2,
   "PulseRadius": 800.0,
   "PulseIntervalSeconds": 3.0,
   "GlowDurationSeconds": 1.0,
+  "FirstPulseDelaySeconds": 1.5,
   "IncludeTeamMates": false,
   "EnemyGlowColor": "#FF0000",
   "AllyGlowColor": "#FF0000",
-  "PulseSound": "ui/beep07.wav",
-  "FirstPulseDelaySeconds": 1.5
+  "PulseSound": "ui/beep07.wav"
 }
 ```
 | Key | Description |
 |-----|-------------|
 | Enabled | Master on/off. |
+| AdminPermissions | Command permission: restricts use of admin commands (empty = unrestricted). |
+| UseGlowPermissions | Trigger permission: only players matching this flag/group can activate scans (empty = all can trigger). |
 | PulseCount | Pulses per decoy. |
 | PulseRadius | Radius per scan (units). |
 | PulseIntervalSeconds | Interval between pulses. |
 | GlowDurationSeconds | Glow lifetime per pulse. |
+| FirstPulseDelaySeconds | Delay from throw to first pulse. |
 | IncludeTeamMates | Include same team (auto overridden by FFA cvar). |
 | EnemyGlowColor / AllyGlowColor | Outline colors (hex). |
 | PulseSound | Sound path (empty = none). |
-| FirstPulseDelaySeconds | Delay from throw to first pulse. |
+
+### Permission System
+Two independent layers:
+1. Command Permission (`AdminPermissions`)
+2. Trigger Permission (`UseGlowPermissions`)
+
+Permission evaluation uses OR logic – matching ANY entry grants access.
+```json
+//Example
+{
+ ...
+  "AdminPermissions": ["@flag", "#group", "76561198000000000"],
+  "UseGlowPermissions": ["@flag", "#group", "76561198000000000"],
+ ...
+}
+```
 
 ### FFA Mode
 If `mp_teammates_are_enemies` is active (“true” / non‑zero) teammates are treated as enemies regardless of `IncludeTeamMates`.
@@ -77,13 +98,16 @@ Lang/zh-Hans.json
 Add more (e.g. `Lang/de.json`) following the same keys.
 
 ## Commands
-| Command | Description |
-|---------|-------------|
-| `css_decoyxr_reload` | Reload configuration. |
-| `css_decoyxr_clear`  | Clear all active glows. |
-| `css_decoyxr_info`   | Show current status. |
-| `css_decoyxr_enable` | Enable pulses. |
-| `css_decoyxr_disable`| Disable pulses & clear glows. |
+| Command | Description | Command Permission | Trigger Permission Affects? |
+|---------|-------------|--------------------|------------------------------|
+| `css_decoyxr_reload` | Reload configuration | Yes | No |
+| `css_decoyxr_clear`  | Clear all active glows | Yes | No |
+| `css_decoyxr_info`   | Show current status | Yes | No |
+| `css_decoyxr_enable` | Enable pulses | Yes | No |
+| `css_decoyxr_disable`| Disable pulses & clear glows | Yes | No |
+
+**Command Permission**: `AdminPermissions`.
+**Trigger Permission**: `UseGlowPermissions` controls who can make pulses happen when throwing a decoy.
 
 ## Balance Suggestions
 | Style | Suggested Config |
@@ -130,6 +154,7 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 - 每脉冲可播放音效（不填写则不播放）
 - 自定义敌我颜色
 - 多语言支持
+- 双层权限：指令权限 + 触发权限（控制谁能用诱饵激活扫描）
 
 ## 原理
 1. 监听武器开火事件检测诱饵 (`weapon_decoy`)
@@ -150,40 +175,63 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 ```json
 {
   "Enabled": true,
+  "AdminPermissions": [],
+  "UseGlowPermissions": [],
   "PulseCount": 2,
   "PulseRadius": 800.0,
   "PulseIntervalSeconds": 3.0,
   "GlowDurationSeconds": 1.0,
+  "FirstPulseDelaySeconds": 1.5,
   "IncludeTeamMates": false,
   "EnemyGlowColor": "#FF0000",
   "AllyGlowColor": "#FF0000",
-  "PulseSound": "ui/beep07.wav",
-  "FirstPulseDelaySeconds": 1.5
+  "PulseSound": "ui/beep07.wav"
 }
 ```
 | 键 | 含义 |
 |----|------|
 | Enabled | 总开关|
+| AdminPermissions | 指令权限控制（空=不限制）|
+| UseGlowPermissions | 触发权限：只有满足该 flag/组 的玩家丢诱饵才会激活扫描（空=所有人可触发）|
 | PulseCount | 每枚诱饵扫描次数|
 | PulseRadius | 单次扫描半径|
 | PulseIntervalSeconds | 扫描间隔|
 | GlowDurationSeconds | 单次描边持续时间|
+| FirstPulseDelaySeconds | 抛出到第一次扫描的延迟|
 | IncludeTeamMates | 是否包含队友（FFA 时自动包含）|
 | EnemyGlowColor / AllyGlowColor | 敌/友描边颜色|
 | PulseSound | 脉冲音效路径（空=关闭）|
-| FirstPulseDelaySeconds | 抛出到第一次扫描的延迟|
+
+### 权限系统
+两层：
+1. 指令权限 (`AdminPermissions`)：控制谁能执行 `css_decoyxr_*` 指令
+2. 触发权限 (`UseGlowPermissions`)：控制谁丢诱饵弹可以触发扫描
+
+权限检测逻辑为OR关系，满足任意一项即可
+```json
+//示例
+{
+...
+  "AdminPermissions": ["@flag","#group","steam64id"],
+  "UseGlowPermissions": ["@flag","#group","steam64id"],
+...
+}
+```
 
 ### FFA 模式
 服务器 `mp_teammates_are_enemies` 开启时即视队友为敌人，忽略 `IncludeTeamMates` 设置
 
 ## 指令
-| 指令 | 说明 |
-|------|------|
-| `css_decoyxr_reload` | 重载配置|
-| `css_decoyxr_clear`  | 清空所有描边|
-| `css_decoyxr_info`   | 查看插件状态|
-| `css_decoyxr_enable` | 启用脉冲|
-| `css_decoyxr_disable`| 禁用脉冲|
+| 指令 | 说明 | 指令权限 | 触发权限影响? |
+|------|------|----------|--------------|
+| `css_decoyxr_reload` | 重载配置 | 是 | 否 |
+| `css_decoyxr_clear`  | 清空所有描边 | 是 | 否 |
+| `css_decoyxr_info`   | 查看插件状态 | 是 | 否 |
+| `css_decoyxr_enable` | 启用脉冲 | 是 | 否 |
+| `css_decoyxr_disable`| 禁用脉冲 | 是 | 否 |
+
+**指令权限**：`AdminPermissions`
+**触发权限**：`UseGlowPermissions` 控制谁能通过诱饵触发扫描
 
 ## 平衡建议
 | 风格 | 建议配置 |

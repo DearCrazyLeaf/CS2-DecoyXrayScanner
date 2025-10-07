@@ -15,6 +15,7 @@ using CounterStrikeSharp.API.Modules.Utils;
 using CounterStrikeSharp.API.Modules.Events;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Cvars;
+using CounterStrikeSharp.API.Modules.Admin;
 using CSVector = CounterStrikeSharp.API.Modules.Utils.Vector;
 using Microsoft.Extensions.Localization;
 
@@ -25,7 +26,7 @@ public sealed class DecoyScannerPlugin : BasePlugin
     public override string ModuleName => "DecoyScanner";
     public override string ModuleAuthor => "DearCrazyLeaf";
     public override string ModuleDescription => "Decoy grenade triggered scanning X-ray pulses";
-    public override string ModuleVersion => "1.0.0";
+    public override string ModuleVersion => "1.0.5";
 
     private readonly List<ActiveGlow> _activeGlows = new();
     private readonly object _lock = new();
@@ -83,17 +84,30 @@ public sealed class DecoyScannerPlugin : BasePlugin
         AddCommand("css_decoyxr_disable", "Disable decoy scanner pulses", CommandDisable);
     }
 
-    #region Commands
+    #region Permissions
+    private bool HasPermission(CCSPlayerController? player) => PermissionUtils.HasAny(player, _config.AdminPermissions);
+    private bool HasGlowPermission(CCSPlayerController? player) => PermissionUtils.HasAny(player, _config.UseGlowPermissions);
+
+    private bool CheckPermissions(CCSPlayerController? player, CommandInfo info)
+    {
+        if (player == null) return true; // console always allowed
+        if (HasPermission(player)) return true;
+        info.ReplyToCommand(L("DecoyXR.NoPermission"));
+        return false;
+    }
+    #endregion
+
+    #region Command Handlers
     private void CommandReloadConfig(CCSPlayerController? player, CommandInfo info)
-    { LoadConfig(); _runtimeEnabled = _config.Enabled; ApplyColors(); info.ReplyToCommand(L("DecoyXR.ConfigReloaded")); }
+    { if (!CheckPermissions(player, info)) return; LoadConfig(); _runtimeEnabled = _config.Enabled; ApplyColors(); info.ReplyToCommand(L("DecoyXR.ConfigReloaded")); }
     private void CommandClearGlows(CCSPlayerController? player, CommandInfo info)
-    { ClearAllGlows(); info.ReplyToCommand(L("DecoyXR.Cleared")); }
+    { if (!CheckPermissions(player, info)) return; ClearAllGlows(); info.ReplyToCommand(L("DecoyXR.Cleared")); }
     private void CommandInfo(CCSPlayerController? player, CommandInfo info)
-    { info.ReplyToCommand(L("DecoyXR.Info", _runtimeEnabled && _config.Enabled, PulsesPerDecoy, PulseIntervalSeconds, _config.PulseRadius, _config.GlowDurationSeconds, _config.IncludeTeamMates, _activeGlows.Count)); }
+    { if (!CheckPermissions(player, info)) return; info.ReplyToCommand(L("DecoyXR.Info", _runtimeEnabled && _config.Enabled, PulsesPerDecoy, PulseIntervalSeconds, _config.PulseRadius, _config.GlowDurationSeconds, _config.IncludeTeamMates, _activeGlows.Count)); }
     private void CommandEnable(CCSPlayerController? player, CommandInfo info)
-    { _runtimeEnabled = true; _config.Enabled = true; SaveConfig(); info.ReplyToCommand(L("DecoyXR.Enabled")); }
+    { if (!CheckPermissions(player, info)) return; _runtimeEnabled = true; _config.Enabled = true; SaveConfig(); info.ReplyToCommand(L("DecoyXR.Enabled")); }
     private void CommandDisable(CCSPlayerController? player, CommandInfo info)
-    { _runtimeEnabled = false; _config.Enabled = false; SaveConfig(); ClearAllGlows(); info.ReplyToCommand(L("DecoyXR.Disabled")); }
+    { if (!CheckPermissions(player, info)) return; _runtimeEnabled = false; _config.Enabled = false; SaveConfig(); ClearAllGlows(); info.ReplyToCommand(L("DecoyXR.Disabled")); }
     #endregion
 
     #region Config
@@ -109,7 +123,8 @@ public sealed class DecoyScannerPlugin : BasePlugin
         _config.GlowDurationSeconds = Math.Clamp(_config.GlowDurationSeconds, 0.05f, 10f);
     }
     private void SaveConfig()
-    { try { File.WriteAllText(ConfigFilePath, JsonSerializer.Serialize(_config, new JsonSerializerOptions { WriteIndented = true })); } catch { } }
+    { try { File.WriteAllText(ConfigFilePath, JsonSerializer.Serialize(_config, new JsonSerializerOptions { WriteIndented = true })); } catch { }
+    }
     private void ApplyColors()
     { _enemyColor = ColorUtils.Parse(_config.EnemyGlowColor, Color.Red); _allyColor = ColorUtils.Parse(_config.AllyGlowColor, Color.Red); }
     #endregion
@@ -269,6 +284,7 @@ public sealed class DecoyScannerPlugin : BasePlugin
         if (!IsActive()) return HookResult.Continue;
         var player = e.Userid; if (player == null || !player.IsValid || !player.PawnIsAlive) return HookResult.Continue;
         if (!string.Equals(e.Weapon, "weapon_decoy", StringComparison.OrdinalIgnoreCase)) return HookResult.Continue;
+        if (!HasGlowPermission(player)) return HookResult.Continue;
         var pawn = player.PlayerPawn?.Value; if (pawn == null || !pawn.IsValid) return HookResult.Continue;
         Vector3 startPos = ToVec3(pawn.AbsOrigin);
         AddTimer(0.05f, () => { if (IsActive() && player.IsValid) StartDecoySequence(player, startPos); });
