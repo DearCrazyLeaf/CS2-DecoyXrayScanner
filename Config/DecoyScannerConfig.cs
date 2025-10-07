@@ -1,5 +1,3 @@
-using System.Drawing;
-using System.Collections.Generic;
 
 namespace CS2_DecoyXrayScanner.Config;
 
@@ -31,5 +29,5 @@ public sealed class DecoyScannerConfig
     // Ally glow color (used only if IncludeTeamMates = true)
     public string AllyGlowColor { get; set; } = "#FF0000";
     // Sound (engine relative path) played once per pulse; leave empty to disable.
-    public string PulseSound { get; set; } = "ui/beep07.wav";
+    public string PulseSound { get; set; } = "ui/competitive_accept_beep.vsnd";
 }

@@ -3,6 +3,6 @@
   "DecoyXR.Cleared": "[{Lime}DecoyXR{Default}] 已清除所有标记",
   "DecoyXR.Enabled": "[{Lime}DecoyXR{Default}] {Green}已启用",
   "DecoyXR.Disabled": "[{Lime}DecoyXR{Default}] {Red}已禁用",
-  "DecoyXR.Info": "[{Lime}DecoyXR{Default}] 是否启用={Orange}{0} 扫描次数={Lime}{1} 间隔={Lime}{2}s 半径={Lime}{3} 显示={Lime}{4}s 是否标记队友={Orange}{5} 活动标记={Lime}{6}",
+  "DecoyXR.Info": "[{Lime}DecoyXR{Default}] 是否启用={Orange}{0} {Default}扫描次数={Lime}{1} {Default}间隔={Lime}{2}{Default}s {Default}半径={Lime}{3} {Default}显示={Lime}{4}{Default}s {Default}是否标记队友={Orange}{5} {Default}活动标记={Lime}{6}",
   "DecoyXR.NoPermission": "[{Lime}DecoyXR{Default}] {Red}没有执行该命令的权限{Default}！"
 }

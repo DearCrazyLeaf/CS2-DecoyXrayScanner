@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Drawing;
-using System.IO;
 using System.Text.Json;
 using CS2_DecoyXrayScanner.Models;
 using CS2_DecoyXrayScanner.Config;
 using CS2_DecoyXrayScanner.Utils;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
-using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Utils;
-using CounterStrikeSharp.API.Modules.Events;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Cvars;
-using CounterStrikeSharp.API.Modules.Admin;
 using CSVector = CounterStrikeSharp.API.Modules.Utils.Vector;
 using Microsoft.Extensions.Localization;
 

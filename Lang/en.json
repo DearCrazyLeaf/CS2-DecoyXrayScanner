@@ -3,6 +3,6 @@
   "DecoyXR.Cleared": "[{Lime}DecoyXR{Default}] All glows cleared",
   "DecoyXR.Enabled": "[{Lime}DecoyXR{Default}] {Green}ENABLED",
   "DecoyXR.Disabled": "[{Lime}DecoyXR{Default}] {Red}DISABLED",
-  "DecoyXR.Info": "[{Lime}DecoyXR{Default}] Enabled={Orange}{0} Pulses={Lime}{1} Interval={Lime}{2}s Radius={Lime}{3} Glow={Lime}{4}s GlowAllies={Orange}{5} ActiveGlows={Lime}{6}",
+  "DecoyXR.Info": "[{Lime}DecoyXR{Default}] Enabled={Orange}{0} {Default}Pulses={Lime}{1} {Default}Interval={Lime}{2}{Default}s {Default}Radius={Lime}{3} {Default}Glow={Lime}{4}{Default}s {Default}GlowAllies={Orange}{5} {Default}ActiveGlows={Lime}{6}",
   "DecoyXR.NoPermission": "[{Lime}DecoyXR{Default}] {Red}You do not have permission"
 }

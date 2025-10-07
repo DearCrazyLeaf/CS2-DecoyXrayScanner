@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using CounterStrikeSharp.API.Modules.Admin;
 using CounterStrikeSharp.API.Core;
 
