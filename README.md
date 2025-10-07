@@ -8,7 +8,10 @@
 [![Downloads](https://img.shields.io/github/downloads/DearCrazyLeaf/CS2-DecoyXrayScanner/total?color=brightgreen)](https://github.com/DearCrazyLeaf/CS2-DecoyXrayScanner/releases)
 [![GitHub Stars](https://img.shields.io/github/stars/DearCrazyLeaf/CS2-DecoyXrayScanner?color=yellow)](https://github.com/DearCrazyLeaf/CS2-DecoyXrayScanner/stargazers)
 
-**CS2 decoy grenade tactical scan pulse plugin.** After a player throws a decoy the plugin performs one or more “tactical awareness” style scan pulses (configurable first delay + interval) that briefly outline enemies (optionally teammates) inside a radius and (optionally) plays a sound. Scanning can be toggled live by commands.
+**CS2 decoy grenade tactical scan pulse plugin.** 
+After a player throws a decoy the plugin performs one or more “tactical awareness” style scan pulses (configurable first delay + interval) that briefly outline enemies (optionally teammates) inside a radius and (optionally) plays a sound. Scanning can be toggled live by commands.
+
+![lovegif_1759796570369](https://github.com/user-attachments/assets/e85055b3-28c0-4d35-86bf-e22633a88d79)
 
 ---
 ## Features
@@ -111,6 +114,8 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 
 **CS2 诱饵弹探测雷“扫描脉冲”插件** 
 玩家丢出诱饵弹后按设定的延迟与间隔执行类似探测手雷的扫描效果，将范围内敌人（可选队友）短暂描边，并播放提示音，可通过指令热开关扫描功能
+
+![lovegif_1759796570369](https://github.com/user-attachments/assets/e85055b3-28c0-4d35-86bf-e22633a88d79)
 
 ## 功能
 - 每枚诱饵多次扫描（可配置次数 / 首次延迟 / 间隔）
