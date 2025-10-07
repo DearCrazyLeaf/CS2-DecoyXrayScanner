@@ -9,7 +9,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/DearCrazyLeaf/CS2-DecoyXrayScanner?color=yellow)](https://github.com/DearCrazyLeaf/CS2-DecoyXrayScanner/stargazers)
 
 **CS2 decoy grenade tactical scan pulse plugin.** 
-After a player throws a decoy the plugin performs one or more “tactical awareness” style scan pulses (configurable first delay + interval) that briefly outline enemies (optionally teammates) inside a radius and (optionally) plays a sound. Scanning can be toggled live by commands.
+- After a player throws a decoy the plugin performs one or more “tactical awareness” style scan pulses (configurable first delay + interval) that briefly outline enemies (optionally teammates) inside a radius and (optionally) plays a sound. Scanning can be toggled live by commands.
 
 ![lovegif_1759796570369](https://github.com/user-attachments/assets/e85055b3-28c0-4d35-86bf-e22633a88d79)
 
@@ -147,9 +147,20 @@ Add more (e.g. `Lang/de.json`) following the same keys.
 4. 修改配置并通过命令或重启生效
 
 ## 配置示例
-见上方英文部分 JSON
-
-参数含义：
+```json
+{
+  "Enabled": true,
+  "PulseCount": 2,
+  "PulseRadius": 800.0,
+  "PulseIntervalSeconds": 3.0,
+  "GlowDurationSeconds": 1.0,
+  "IncludeTeamMates": false,
+  "EnemyGlowColor": "#FF0000",
+  "AllyGlowColor": "#FF0000",
+  "PulseSound": "ui/beep07.wav",
+  "FirstPulseDelaySeconds": 1.5
+}
+```
 | 键 | 含义 |
 |----|------|
 | Enabled | 总开关|
